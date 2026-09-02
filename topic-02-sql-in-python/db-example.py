@@ -21,6 +21,10 @@ cursor = connection.execute(
     order by name
     """
 )
+
+
+print(cursor)
+
 list_of_tables = [item[0] for item in cursor.fetchall()]
 print("the tables:")
 pprint(list_of_tables)
@@ -99,6 +103,16 @@ connection.execute(
     ("Stash", "mouse", 1, "cheese"),
 )
 
+connection.execute(
+    "insert into pet (name, kind, age, food) values (?, ?, ?, ?)",
+    ("Tom", "cat", 3, "salmon"),
+)
+
+connection.execute(
+    "insert into pet (name, kind, age, food) values (?, ?, ?, ?)",
+    ("Jerry", "mouse", 1, "cheese"),
+)
+
 connection.commit()
 
 connection.execute(
@@ -113,6 +127,9 @@ connection.execute(
 connection.commit()
 print("update complete")
 
+cursor = connection.execute("select * from pet")
+rows = cursor.fetchall()
+pprint(rows)
 
 
 print("done.")
