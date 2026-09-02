@@ -22,8 +22,8 @@ cursor = connection.execute(
     """
 )
 
-
-print(cursor)
+# list_of_tables = [item[0] for item in list(cursor)]
+# print(list_of_tables) 
 
 list_of_tables = [item[0] for item in cursor.fetchall()]
 print("the tables:")
@@ -115,6 +115,10 @@ connection.execute(
 
 connection.commit()
 
+cursor = connection.execute("select * from pet")
+rows = cursor.fetchall()
+pprint(rows)
+
 connection.execute(
     "delete from pet where name=?",("Stash",)
     )
@@ -130,6 +134,5 @@ print("update complete")
 cursor = connection.execute("select * from pet")
 rows = cursor.fetchall()
 pprint(rows)
-
 
 print("done.")
